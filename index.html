@@ -92,6 +92,9 @@
   #ukk details[open] summary::before{ transform:rotate(90deg); }
   #ukk .faq-item p{ margin:10px 0 0 16px; font-size:13.5px; color:var(--muted); line-height:1.6; max-width:64ch; }
   #ukk .faq-item p + p{ margin-top:8px; }
+  #ukk .faq-item ul{ margin:8px 0 0 16px; padding:0 0 0 18px; font-size:13.5px; color:var(--muted); line-height:1.6; max-width:64ch; }
+  #ukk .faq-item ul + p{ margin-top:8px; }
+  #ukk .faq-item li + li{ margin-top:4px; }
 
   footer{
     padding:22px clamp(20px,5vw,48px) 30px; font-size:11.5px; color:var(--muted-2);
@@ -150,7 +153,7 @@
 
     <section id="meshtastic">
       <div class="section-head"><h2>Meshtastic</h2></div>
-      <p class="section-lede">Öööö</p>
+      <p class="section-lede">Yksinkertainen ja joustava LoRa-mesh-pino.</p>
       <div class="links-grid">
         <a class="card" href="https://meshtastic.liamcottle.net/?lat=60.41588639852533&lng=381.60461425781256&zoom=9" target="_blank" rel="noopener">
           <h3>Meshtastic-kartta <span class="arrow">↗</span></h3>
@@ -186,14 +189,16 @@
       </details>
       <details class="faq-item">
         <summary>Kumpi kannattaa valita, MeshCore vai Meshtastic?</summary>
-        <p>Rehellisesti molemmat toimivat, mutta MeshCore kehitettiin ratkaisemaan Meshtasticin puutteita. </p>
-        <p>Meshtastic verkossa kaikki laitteet vastaanottavat ja välittävät viestejä. 
+        <p>Rehellisesti sanottuna molemmat toimivat, mutta MeshCore kehitettiin ratkaisemaan Meshtasticin puutteita kuten mahdollistamaan paremman reitityksen ja vastaanottokuittaukset.</p>
+        <p>Meshtastic verkossa kaikki laitteet vastaanottavat ja välittävät viestejä. Tämä toimii hyvin joustavuutta vaativissa tilanteissa.
        </p>
-        <p>MeshCore verkossa laitteet toimivat joko Companion, Repeater, Room Server, tai muussa roolissa.
-            Companion on yleensä mukana kulkeva puhelimen sovellukseen yhdistetty laite - myös dedikoituja laitteita löytyy.
-            Repeater on paikallaan pysyvä tukiasema - esimerkiksi parvekkeella, ikkunalla tai katolla oleva laite.
-            Room Server on hieman BBSää muistuttava chat-huone. 
-        </p>
+        <p>MeshCore verkossa laitteet toimivat joko Companion, Repeater, Room Server, tai muissa roolissa.</p>
+        <ul>
+          <li><strong>Companion</strong> — yleensä mukana kulkeva puhelimen sovellukseen yhdistetty laite - myös dedikoituja laitteita löytyy.</li>
+          <li><strong>Repeater</strong> — paikallaan pysyvä tukiasema - esimerkiksi parvekkeella, ikkunalla tai katolla oleva laite.</li>
+          <li><strong>Room Server</strong> — hieman BBSää muistuttava chat-huone.</li>
+        </ul>
+        <p>Kaikki roolit saa tarvittaessa välittämään viestejä, mutta tämä ei ole suositeltua.</p>
       </details>
       <details class="faq-item">
         <summary>Mitä laitteita tarvitsen ja paljonko ne maksavat?</summary>
