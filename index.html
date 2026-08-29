@@ -1,1 +1,280 @@
-vasumesh.fi
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vasumesh — Varsinais-Suomen mesh-verkko</title>
+<meta name="description" content="Varsinais-Suomen mesh-verkkoyhteisö. MeshCore-runkoverkko ja Meshtastic-yhteensopivuus, kartat, liittymisohjeet ja usein kysytyt kysymykset.">
+<meta property="og:title" content="Vasumesh — Varsinais-Suomen mesh-verkko">
+<meta property="og:description" content="MeshCore-runkoverkko ja Meshtastic-yhteensopivuus Varsinais-Suomessa. Kartat, yhteisö ja UKK.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0e15'/%3E%3Ccircle cx='9' cy='22' r='2.6' fill='%235ee6c8'/%3E%3Ccircle cx='23' cy='9' r='2.6' fill='%235ee6c8'/%3E%3Ccircle cx='23' cy='23' r='2' fill='%235c6b7f'/%3E%3Cpath d='M9 22 L23 9 M9 22 L23 23' stroke='%235ee6c8' stroke-width='1.2' opacity='.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --bg:#0a0e15;
+    --ink:#dbe6f2;
+    --muted:#93a4bb;
+    --muted-2:#5c6b7f;
+    --line:rgba(255,255,255,.08);
+    --card:rgba(255,255,255,.04);
+    --card-line:rgba(255,255,255,.08);
+    --teal:#5ee6c8;
+    --gold:#c19a4a;
+    --gold-bright:#e3c988;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Sora',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  .wrap{ position:relative; overflow:hidden; }
+  #meshcanvas{ position:fixed; inset:0; width:100%; height:100%; opacity:.45; z-index:0; pointer-events:none; }
+  .content{ position:relative; z-index:1; }
+
+  .river{ height:2px; background:linear-gradient(90deg, rgba(193,154,74,0) 0%, var(--gold) 50%, rgba(193,154,74,0) 100%); box-shadow:0 0 12px 0 rgba(193,154,74,.5); }
+
+  nav{ display:flex; justify-content:space-between; align-items:center; padding:18px clamp(20px,5vw,48px) 16px; flex-wrap:wrap; gap:12px; }
+  .logo{ display:flex; align-items:center; gap:8px; font-family:'Cormorant Garamond',serif; font-weight:600; font-size:19px; letter-spacing:.02em; text-decoration:none; }
+  .logo .crest{ font-size:17px; }
+  .navlinks{ display:flex; gap:22px; font-size:13px; color:var(--muted); flex-wrap:wrap; }
+  .navlinks a{ text-decoration:none; }
+  .navlinks a:hover{ color:var(--ink); }
+  .navlinks a:focus-visible, a:focus-visible{ outline:2px solid var(--teal); outline-offset:3px; border-radius:2px; }
+  .navright{ display:flex; align-items:center; gap:22px; }
+  .icon-link{ display:flex; color:var(--muted); }
+  .icon-link:hover{ color:var(--ink); }
+  .icon-link svg{ width:20px; height:20px; }
+
+  .hero{ padding:clamp(28px,6vw,48px) clamp(20px,5vw,48px) 44px; max-width:680px; }
+  .eyebrow{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:.16em; margin:0 0 16px; text-transform:uppercase; }
+  h1{ font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(32px,5.5vw,50px); line-height:1.08; margin:0 0 18px; text-wrap:balance; }
+  h1 .mc{ color:var(--teal); font-style:italic; }
+  .hero p.lede{ font-size:16px; line-height:1.65; color:var(--muted); margin:0 0 22px; max-width:52ch; }
+  .taunt{ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:var(--gold-bright); border-left:2px solid rgba(193,154,74,.5); padding-left:14px; margin:0 0 24px; }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:26px; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; background:var(--teal); color:#06110e; font-weight:600; padding:11px 20px; border-radius:999px; font-size:13.5px; text-decoration:none; }
+  .btn.ghost{ background:rgba(255,255,255,.06); color:var(--ink); border:1px solid rgba(255,255,255,.14); }
+  .node-legend{ display:flex; gap:20px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); flex-wrap:wrap; }
+  .node-legend .dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
+
+  section{ padding:0 clamp(20px,5vw,48px) 52px; max-width:1040px; }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:8px; flex-wrap:wrap; }
+  h2{ font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0; font-weight:600; }
+  .section-lede{ font-size:14.5px; color:var(--muted); max-width:62ch; margin:0 0 22px; line-height:1.6; }
+
+  .links-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:14px; }
+  .card{
+    background:var(--card); border:1px solid var(--card-line); border-top:2px solid rgba(193,154,74,.35);
+    border-radius:10px; padding:18px 20px; text-decoration:none; display:block; color:inherit;
+    transition:border-color .15s, background .15s, transform .15s;
+  }
+  .card:hover{ background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.18); transform:translateY(-1px); }
+  .card:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+  .card h3{ margin:0 0 5px; font-size:15px; font-weight:600; display:flex; align-items:center; gap:8px; }
+  .card p{ margin:0; font-size:12.5px; color:var(--muted); line-height:1.5; }
+  .card .arrow{ color:var(--muted-2); font-size:13px; }
+  .badge{ font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; padding:2px 7px; border-radius:999px; }
+  .badge.mc{ background:rgba(94,230,200,.12); color:var(--teal); }
+  .badge.mt{ background:rgba(147,164,187,.14); color:var(--muted); }
+
+  #ukk .faq-item{ border-top:1px solid var(--line); padding:16px 0; }
+  #ukk .faq-item:last-child{ border-bottom:1px solid var(--line); }
+  #ukk summary{ cursor:pointer; font-weight:600; font-size:14.5px; list-style:none; display:flex; align-items:baseline; gap:8px; }
+  #ukk summary::-webkit-details-marker{ display:none; }
+  #ukk summary::before{ content:"›"; color:var(--gold); transition:transform .15s; }
+  #ukk details[open] summary::before{ transform:rotate(90deg); }
+  #ukk .faq-item p{ margin:10px 0 0 16px; font-size:13.5px; color:var(--muted); line-height:1.6; max-width:64ch; }
+  #ukk .faq-item p + p{ margin-top:8px; }
+
+  footer{
+    padding:22px clamp(20px,5vw,48px) 30px; font-size:11.5px; color:var(--muted-2);
+    border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; max-width:1040px;
+  }
+  footer a{ text-decoration:underline; text-underline-offset:2px; }
+
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <canvas id="meshcanvas"></canvas>
+  <div class="content">
+    <div class="river"></div>
+    <nav>
+      <a class="logo" href="#top"><span class="crest">🏰</span>Varsinais-Suomi Mesh</a>
+      <div class="navright">
+        <div class="navlinks">
+          <a href="#meshcore">MeshCore</a>
+          <a href="#meshtastic">Meshtastic</a>
+          <a href="#yhteiso">Yhteisö</a>
+          <a href="#ukk">UKK</a>
+        </div>
+        <a class="icon-link" href="https://github.com/sigurs/vasumesh-fi" target="_blank" rel="noopener" aria-label="GitHub-repositorio">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        </a>
+      </div>
+    </nav>
+
+    <div class="hero" id="top">
+      <p class="eyebrow">Varsinais-Suomi</p>
+      <h1>Varsinais-Suomen Mesh</h1>
+      <p class="lede">Vasumesh on Varsinais-Suomen mesh-radioyhteisö. Tältä sivulta löydät ohjeita ja linkkejä miten liittyä mukaan!</p>
+      <p class="taunt">Tampereella on hyvä verkko. <b>Meidän pitää tehdä parempi.</b></p>
+    </div>
+
+    <section id="meshcore">
+      <div class="section-head"><h2>MeshCore</h2></div>
+      <p class="section-lede">Kevyt, pitkän kantaman LoRa-mesh-pino, joka sopii hyvin Varsinais-Suomen saaristo- ja rannikkomaastoon.</p>
+      <div class="links-grid">
+        <a class="card" href="https://map.meshcore.io/?lat=60.4768&lon=21.7749&zoom=9" target="_blank" rel="noopener">
+          <h3>MeshCore-kartta <span class="arrow">↗</span></h3>
+          <p>Virallinen reaaliaikainen solmukartta, keskitetty Varsinais-Suomeen.</p>
+        </a>
+        <a class="card" href="https://tku.meshmapper.net/" target="_blank" rel="noopener">
+          <h3>Turun MeshMapper <span class="arrow">↗</span></h3>
+          <p>Alueellinen solmukartta ja kantavuusdata Turun seudulta.</p>
+        </a>
+        <a class="card" href="https://meshcore.io/" target="_blank" rel="noopener">
+          <h3>meshcore.io <span class="arrow">↗</span></h3>
+          <p>Virallinen sivusto: dokumentaatio, firmware ja laitetuki.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="meshtastic">
+      <div class="section-head"><h2>Meshtastic</h2></div>
+      <p class="section-lede">Öööö</p>
+      <div class="links-grid">
+        <a class="card" href="https://meshtastic.liamcottle.net/?lat=60.41588639852533&lng=381.60461425781256&zoom=9" target="_blank" rel="noopener">
+          <h3>Meshtastic-kartta <span class="arrow">↗</span></h3>
+          <p>Alueen Meshtastic-solmut kartalla.</p>
+        </a>
+        <a class="card" href="https://meshtastic.org/" target="_blank" rel="noopener">
+          <h3>meshtastic.org <span class="arrow">↗</span></h3>
+          <p>Virallinen sivusto: dokumentaatio, firmware ja laitetuki.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="yhteiso">
+      <div class="section-head"><h2>Yhteisö</h2></div>
+      <p class="section-lede">Vasumesh toimii osana suomalaista mesh-yhteisöä</p>
+      <div class="links-grid">
+        <a class="card" href="https://discord.com/invite/GHnaVAjqed" target="_blank" rel="noopener">
+          <h3>MeshFinland Discord <span class="arrow">↗</span></h3>
+          <p>Liity ja etsi kanava <strong>area-specific-chats → Turun alue</strong>.</p>
+        </a>
+        <a class="card" href="https://www.meshabout.fi/" target="_blank" rel="noopener">
+          <h3>meshabout.fi <span class="arrow">↗</span></h3>
+          <p>MeshFinland: koko Suomen mesh-yhteisön kotisivu.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="ukk">
+      <div class="section-head"><h2>UKK</h2></div>
+      <details class="faq-item" open>
+        <summary>Mitä ovat MeshCore ja Meshtastic?</summary>
+        <p>Molemmat ovat kevyitä LoRa pohjaisia mesh-verkkoja jotka mahdollistavat viestinnän matkapuhelinverkon ulkopuolella. Projektit käyttävät samoja laitteita, mutta eivät ole keskenään yhteensopivia.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Kumpi kannattaa valita, MeshCore vai Meshtastic?</summary>
+        <p>Rehellisesti molemmat toimivat, mutta MeshCore kehitettiin ratkaisemaan Meshtasticin puutteita. </p>
+        <p>Meshtastic verkossa kaikki laitteet vastaanottavat ja välittävät viestejä. 
+       </p>
+        <p>MeshCore verkossa laitteet toimivat joko Companion, Repeater, Room Server, tai muussa roolissa.
+            Companion on yleensä mukana kulkeva puhelimen sovellukseen yhdistetty laite - myös dedikoituja laitteita löytyy.
+            Repeater on paikallaan pysyvä tukiasema - esimerkiksi parvekkeella, ikkunalla tai katolla oleva laite.
+            Room Server on hieman BBSää muistuttava chat-huone. 
+        </p>
+      </details>
+      <details class="faq-item">
+        <summary>Mitä laitteita tarvitsen ja paljonko ne maksavat?</summary>
+        <p>Tarvitset LoRa-radiomoduulilla varustetun solmulaitteen (esim. Heltec-, RAK- tai T-Deck-tyyppinen laite) sekä puhelimen tai tietokoneen mukana-appia varten. Hintahaarukka on karkeasti 20–100 € laitteesta riippuen.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Tarvitsenko luvan tai radioamatöörisertifikaatin?</summary>
+        <p>Sekä MeshCore että Meshtastic käyttävät Euroopassa 868 MHz:n lupavapaata ISM-taajuusaluetta laitteen tehorajoissa. Radioamatöörilupaa ei tavallisessa käytössä tarvita — tarkista silti aina laitteesi asetukset ja lähetysteho paikallisten määräysten mukaisiksi.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Miten liityn Varsinais-Suomen verkkoon?</summary>
+        <p>Liity MeshFinlandin Discordiin ja etsi kanava <strong>area-specific-chats → Turun alue</strong>. Siellä sovitaan solmujen sijainneista ja autetaan asennuksessa. Voit myös katsoa lähimmät solmut MeshCore- tai Meshtastic-kartalta ennen laitehankintaa.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Kuka Vasumeshia ylläpitää?</summary>
+        <p>Vasumesh on Varsinais-Suomen alueen harrastajien kokoama yhteisösivusto, ei kaupallinen operaattori eikä virallinen osa MeshCore- tai Meshtastic-projekteja. Verkkoa rakentavat ja ylläpitävät alueen mesh-harrastajat itse.</p>
+      </details>
+    </section>
+
+    <footer>
+      <span>Varsinais-Suomen mesh-yhteisö · ei virallinen operaattori</span>
+    </footer>
+  </div>
+</div>
+
+<script>
+(function(){
+  var canvas = document.getElementById('meshcanvas');
+  var ctx = canvas.getContext('2d');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pts = [];
+  var N = 46;
+  var W, H, DPR;
+
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  function seed(){
+    pts = [];
+    for (var i=0;i<N;i++){
+      pts.push({
+        x: Math.random()*W, y: Math.random()*H,
+        vx:(Math.random()-0.5)*0.18, vy:(Math.random()-0.5)*0.18,
+        mc: Math.random() < 0.6
+      });
+    }
+  }
+  resize(); seed();
+  window.addEventListener('resize', function(){ resize(); seed(); });
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    for (var i=0;i<N;i++){
+      var p = pts[i];
+      if (!reduced){ p.x += p.vx; p.y += p.vy; }
+      if (p.x<0||p.x>W) p.vx*=-1;
+      if (p.y<0||p.y>H) p.vy*=-1;
+    }
+    for (var i=0;i<N;i++){
+      for (var j=i+1;j<N;j++){
+        var a=pts[i], b=pts[j];
+        var d = Math.hypot(a.x-b.x, a.y-b.y);
+        if (d < 160){
+          ctx.strokeStyle = 'rgba(94,230,200,' + (0.14*(1-d/160)) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    for (var i=0;i<N;i++){
+      var p = pts[i];
+      ctx.fillStyle = p.mc ? '#5ee6c8' : '#5c6b7f';
+      ctx.beginPath(); ctx.arc(p.x,p.y, p.mc?2.6:1.8, 0, Math.PI*2); ctx.fill();
+    }
+    if (!reduced) requestAnimationFrame(frame);
+  }
+  frame();
+})();
+</script>
+</body>
+</html>
