@@ -113,7 +113,7 @@
   <div class="content">
     <div class="river"></div>
     <nav>
-      <a class="logo" href="#top"><span class="crest">🏰</span>Varsinais-Suomi Mesh</a>
+      <a class="logo" href="#top"><span class="crest">🏰</span>Varsinais-Suomen Mesh</a>
       <div class="navright">
         <div class="navlinks">
           <a href="#meshcore">MeshCore</a>
@@ -129,8 +129,8 @@
 
     <div class="hero" id="top">
       <p class="eyebrow">Varsinais-Suomi</p>
-      <h1>Varsinais-Suomen Mesh</h1>
-      <p class="lede">Vasumesh on Varsinais-Suomen mesh-radioyhteisö. Tältä sivulta löydät ohjeita ja linkkejä miten liittyä mukaan!</p>
+
+      <p class="lede">Vasumesh on Varsinais-Suomen alueen harrastajille suunnattu yhteisösivusto. Tältä sivulta löydät ohjeita ja linkkejä siihen, miten pääset mukaan!</p>
       <p class="taunt">Tampereella on hyvä verkko. <b>Meidän pitää tehdä parempi.</b></p>
     </div>
 
@@ -170,7 +170,7 @@
 
     <section id="yhteiso">
       <div class="section-head"><h2>Yhteisö</h2></div>
-      <p class="section-lede">Vasumesh toimii osana suomalaista mesh-yhteisöä</p>
+      <p class="section-lede">Vasumesh toimii osana suomalaista mesh-yhteisöä.</p>
       <div class="links-grid">
         <a class="card" href="https://discord.com/invite/GHnaVAjqed" target="_blank" rel="noopener">
           <h3>MeshFinland Discord <span class="arrow">↗</span></h3>
@@ -187,52 +187,72 @@
       <div class="section-head"><h2>UKK</h2></div>
       <details class="faq-item" open>
         <summary>Mitä ovat MeshCore ja Meshtastic?</summary>
-        <p>Molemmat ovat kevyitä LoRa pohjaisia mesh-verkkoja jotka mahdollistavat viestinnän matkapuhelinverkon ulkopuolella. Projektit käyttävät samoja laitteita, mutta eivät ole keskenään yhteensopivia.</p>
+        <p>Molemmat ovat kevyitä LoRa-pohjaisia mesh-verkkoja, jotka mahdollistavat viestinnän matkapuhelinverkon ulkopuolella. Projektit käyttävät samoja laitteita, mutta eivät ole keskenään yhteensopivia.</p>
       </details>
       <details class="faq-item">
         <summary>Kumpi kannattaa valita, MeshCore vai Meshtastic?</summary>
-        <p>Elämä on valintoja täynnä - tämä ei onneksi vie mukanaan omakotitaloa ja lapsia. Tiivistetysti molemmat toimivat, mutta MeshCore paikkaa tiettyjä Meshtasticin puutteita kuten mahdollistaa paremman reitityksen ja vastaanottokuittaukset.</p>
-        <p><strong>Meshtastic</strong> verkossa kaikki laitteet vastaanottavat ja välittävät viestejä. Tämä toimii hyvin joustavuutta vaativissa tilanteissa.
-       </p>
-        <p><strong>MeshCore</strong> verkossa laitteet toimivat joko Companion, Repeater, Room Server, tai muissa roolissa.</p>
+        <p>Elämä on täynnä valintoja – tämä ei onneksi vie mukanaan omakotitaloa ja lapsia. Tiivistetysti molemmat toimivat, mutta MeshCore paikkaa tiettyjä Meshtasticin puutteita: se mahdollistaa paremman reitityksen ja vastaanottokuittaukset.</p>
+        <p><strong>Meshtastic</strong>-verkossa kaikki laitteet vastaanottavat ja välittävät viestejä. Tämä toimii hyvin joustavuutta vaativissa tilanteissa. Huomioitavaa on, että verkko on jakautunut kahteen radioasetukseen (LongFast ja EdgeFastLow), jotka eivät ole yhteensopivia keskenään.</p>
+        <p><strong>MeshCore</strong>-verkossa laitteet toimivat joko Companion-, Repeater-, Room Server- tai muissa rooleissa.</p>
         <ul>
-          <li><span class="term">Companion</span> — laite jolla liityt verkkoon. Yleensä mukana kulkeva puhelimen sovellukseen yhdistetty laite, mutta myös dedikoituja laitteita on olemassa.</li>
-          <li><span class="term">Repeater</span> — paikallaan pysyvä tukiasema - esimerkiksi parvekkeella, ikkunalla tai katolla oleva laite.</li>
-          <li><span class="term">Room Server</span> — hieman BBSää muistuttava chat-huone.</li>
-          <li>Kaikki roolit saa tarvittaessa välittämään viestejä, mutta tämä ei ole suositeltua.</li>
+          <li><span class="term">Companion</span> — laite, jolla liityt verkkoon. Yleensä mukana kulkeva, puhelimen sovellukseen yhdistetty laite, mutta myös dedikoituja laitteita on olemassa.</li>
+          <li><span class="term">Repeater</span> — paikallaan pysyvä tukiasema, esimerkiksi parvekkeella, ikkunalla tai katolla oleva laite.</li>
+          <li><span class="term">Room Server</span> — hieman BBS:ää muistuttava chat-huone.</li>
+          <li>Kaikki roolit saa tarvittaessa välittämään viestejä, mutta tämä ei ole suositeltavaa.</li>
         </ul>
-        <p>Verkot käyttävät eri radio-asetuksia, joten myös <span class="term">kuuluvuudessa on eroja.</span> Eräät sähkömittarit toimivat samoilla taajuuksilla varsinkin Meshtasticin kanssa joka voi rajoittaa kuuluvuutta - esimerkiksi Turussa MeshCore vaikuttaa kuuluvan paremmin kuin Meshtastic.</p>
+        <p>Verkot käyttävät eri radioasetuksia, joten myös <span class="term">kuuluvuudessa on eroja.</span> Eräät sähkömittarit toimivat samoilla taajuuksilla varsinkin Meshtasticin kanssa, mikä voi rajoittaa kuuluvuutta – esimerkiksi Turussa MeshCore vaikuttaa kuuluvan paremmin kuin Meshtastic.</p>
       </details>
       <details class="faq-item">
-        <summary><span class="term">MeshCore</span> asetukset Suomessa</summary>
-        <p>Suomessa käytetään <span class="term">EU/UK (Narrow)</span>-presettiä.</p>
-        <p>Kanavat (Channels):</p>
+        <summary><span class="term">MeshCore</span>-asetukset Suomessa</summary>
+        <p>Suomessa käytetään 868 MHz:n <span class="term">EU/UK (Narrow)</span> -presettiä.</p>
+        <p><strong>Kanavat (Channels):</strong></p>
         <ul>
-          <li><span class="term">#public</span> — Oletuskanava jolle sataa liikennettä satunnaisesti muualtakin Euroopasta.</li>
-          <li><span class="term">#finland</span> — Suomen kanava jolla keskustelu pysyy paremmin koossa.</li>
+          <li><span class="term">#public</span> — Oletuskanava, jolle sataa liikennettä satunnaisesti muualtakin Euroopasta.</li>
+          <li><span class="term">#finland</span> — Suomen kanava, jolla keskustelu pysyy paremmin koossa.</li>
         </ul>
+        <p>Muista myös asettaa airtime <a href="https://github.com/meshcore-dev/MeshCore/issues/2047">lainsäätäjän määrittämiin rajoihin.</a></p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="term">Meshtastic</span>-asetukset Suomessa</summary>
+        <p>Suomessa käytetään yleisesti joko 868 MHz:n <span class="term">LongFast</span>- tai <span class="term">EdgeFastLow</span>-radioasetuksia, jotka eivät ole keskenään yhteensopivia.</p>
+        <p><strong>Kanavat (Channels):</strong></p>
+        <ul>
+          <li><span class="term">LongFast</span> tai <span class="term">EdgeFastLow</span> — Oletuskanava, jolle sataa liikennettä satunnaisesti muualtakin Euroopasta.</li>
+          <li><span class="term">Radio</span> — Käytetään pelkästään radion yli tapahtuvaan kommunikaatioon.</li>
+          <li><span class="term">Radio&amp;MQTT</span> — Käytetään sekä radio- että MQTT-kommunikaatioon.</li>
+        </ul>
+        <p>Muista myös asettaa airtime lainsäätäjän määrittämiin rajoihin.</p>
+        <p>Lisää tietoa Meshtasticista Suomessa löydät vaikka osoitteesta <a href="https://meshabout.fi">meshabout.fi</a>.</p>
       </details>
       <details class="faq-item">
         <summary>Mitä laitteita tarvitsen ja paljonko ne maksavat?</summary>
-        <p>Tarvitset LoRa-radiomoduulilla varustetun solmulaitteen (esim. Heltec-, RAK- tai T-Deck-tyyppinen laite) sekä puhelimen tai tietokoneen Companion-appia varten. Hintahaarukka on karkeasti 20–100 € laitteesta riippuen.</p>
+        <p>MeshCore ja Meshtastic käyttävät pitkälti samoja laitteita, ja edullisimmillaan pääset mukaan solmulaitteella, joka yhdistetään puhelimeen Bluetoothin avulla. Yhteensopivuus kannattaa kuitenkin tarkistaa Googlella.</p>
+        <p><strong>Joitain laitteita:</strong></p>
+        <ul>
+          <li><span class="term">Heltec V4.3+</span> — Toimivat hyvin kaikissa rooleissa, mutta ESP32-pohjaisina kuluttavat enemmän virtaa kuin nRF-pohjaiset.</li>
+          <li><span class="term">Heltec Mesh Node T114</span> — Vähän virtaa kuluttava nRF-pohjainen laite, jonka virrankulutus on liian vähäistä useimmille virtapankeille. Soveltuu hyvin mukana kulkevaksi nodeksi tai aurinkopaneelin kaveriksi.</li>
+          <li><span class="term">RAK</span> — Luotettavia, hieman kalliimpia laitteita.</li>
+          <li><span class="term">Kommunikaattorit</span> — Myös puhelinta muistuttavia kommunikaattoreita löytyy, esimerkiksi T-Deck, Elecrow M9 ja muut vastaavat.</li>
+        </ul>
+        <p>Laitteesta ja käyttötarkoituksesta riippuen parempi antenni voi olla tarpeen. Meshtasticin ja MeshCoren verkkosivuilla on aiheesta paljon tietoa, johon kannattaa tutustua.</p>
+        <p>Esimerkkinä allekirjoittaneen laitteet:</p>
+        <ul>
+          <li><span class="term">MeshCore Companion</span> — Helposti mukana kulkeva Heltec T114, Gizontin 20 cm:n 868 MHz:n antenni (AliExpress) sekä 1000 mAh:n akku juotettuna T114:n kotelon sisälle.</li>
+          <li><span class="term">MeshCore Repeater</span> — Kodin seinässä pysyvä Heltec V4 sekä Mikrotik 868 Omni -antenni. Kytkettynä verkkovirtaan.</li>
+        </ul>
       </details>
       <details class="faq-item">
-        <summary>Tarvitsenko luvan tai radiomatööriluvan?</summary>
+        <summary>Tarvitsenko luvan tai radioamatööriluvan?</summary>
         <p>Sekä MeshCore että Meshtastic käyttävät Euroopassa 868 MHz:n lupavapaata ISM-taajuusaluetta laitteen tehorajoissa. Radioamatöörilupaa ei tavallisessa käytössä tarvita — tarkista silti aina laitteesi asetukset ja lähetysteho paikallisten määräysten mukaisiksi.</p>
       </details>
       <details class="faq-item">
-        <summary>Miten liityn Varsinais-Suomen verkkoon?</summary>
-        <p>ööö</p>
-        <p>Liity MeshFinlandin Discordiin ja etsi kanava <strong>area-specific-chats → Turun alue</strong>. Siellä sovitaan solmujen sijainneista ja autetaan asennuksessa. Voit myös katsoa lähimmät solmut MeshCore- tai Meshtastic-kartalta ennen laitehankintaa.</p>
-      </details>
-      <details class="faq-item">
         <summary>Kuka Vasumeshia ylläpitää?</summary>
-        <p>Vasumesh on Varsinais-Suomen alueen harrastajien kokoama yhteisösivusto, ei kaupallinen operaattori eikä virallinen osa MeshCore- tai Meshtastic-projekteja. Verkkoa rakentavat ja ylläpitävät alueen mesh-harrastajat itse.</p>
+        <p>Vasumesh on Varsinais-Suomen alueen harrastajille suunnattu yhteisösivusto, ei kaupallinen operaattori eikä virallinen osa MeshCore- tai Meshtastic-projekteja. Verkkoa rakentavat ja ylläpitävät alueen mesh-harrastajat itse.</p>
       </details>
     </section>
 
     <footer>
-      <span>Varsinais-Suomen mesh-yhteisö · ei virallinen operaattori</span>
+      <span>Varsinais-Suomen Mesh · ei virallinen operaattori</span>
     </footer>
   </div>
 </div>
