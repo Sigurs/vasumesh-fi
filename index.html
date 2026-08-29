@@ -95,6 +95,8 @@
   #ukk .faq-item ul{ margin:8px 0 0 16px; padding:0 0 0 18px; font-size:13.5px; color:var(--muted); line-height:1.6; max-width:64ch; }
   #ukk .faq-item ul + p{ margin-top:8px; }
   #ukk .faq-item li + li{ margin-top:4px; }
+  #ukk .faq-item strong{ color:var(--gold-bright); }
+  #ukk .faq-item .term{ color:var(--gold-bright); font-weight:600; }
 
   footer{
     padding:22px clamp(20px,5vw,48px) 30px; font-size:11.5px; color:var(--muted-2);
@@ -189,27 +191,29 @@
       </details>
       <details class="faq-item">
         <summary>Kumpi kannattaa valita, MeshCore vai Meshtastic?</summary>
-        <p>Rehellisesti sanottuna molemmat toimivat, mutta MeshCore kehitettiin ratkaisemaan Meshtasticin puutteita kuten mahdollistamaan paremman reitityksen ja vastaanottokuittaukset.</p>
-        <p>Meshtastic verkossa kaikki laitteet vastaanottavat ja välittävät viestejä. Tämä toimii hyvin joustavuutta vaativissa tilanteissa.
+        <p>Elämä on valintoja täynnä - tämä ei onneksi vie mukanaan omakotitaloa ja lapsia. Tiivistetysti molemmat toimivat, mutta MeshCore paikkaa tiettyjä Meshtasticin puutteita kuten mahdollistaa paremman reitityksen ja vastaanottokuittaukset.</p>
+        <p><strong>Meshtastic</strong> verkossa kaikki laitteet vastaanottavat ja välittävät viestejä. Tämä toimii hyvin joustavuutta vaativissa tilanteissa.
        </p>
-        <p>MeshCore verkossa laitteet toimivat joko Companion, Repeater, Room Server, tai muissa roolissa.</p>
+        <p><strong>MeshCore</strong> verkossa laitteet toimivat joko Companion, Repeater, Room Server, tai muissa roolissa.</p>
         <ul>
-          <li><strong>Companion</strong> — yleensä mukana kulkeva puhelimen sovellukseen yhdistetty laite - myös dedikoituja laitteita löytyy.</li>
-          <li><strong>Repeater</strong> — paikallaan pysyvä tukiasema - esimerkiksi parvekkeella, ikkunalla tai katolla oleva laite.</li>
-          <li><strong>Room Server</strong> — hieman BBSää muistuttava chat-huone.</li>
+          <li><span class="term">Companion</span> — laite jolla liityt verkkoon. Yleensä mukana kulkeva puhelimen sovellukseen yhdistetty laite, mutta myös dedikoituja laitteita on olemassa.</li>
+          <li><span class="term">Repeater</span> — paikallaan pysyvä tukiasema - esimerkiksi parvekkeella, ikkunalla tai katolla oleva laite.</li>
+          <li><span class="term">Room Server</span> — hieman BBSää muistuttava chat-huone.</li>
+          <li>Kaikki roolit saa tarvittaessa välittämään viestejä, mutta tämä ei ole suositeltua.</li>
         </ul>
-        <p>Kaikki roolit saa tarvittaessa välittämään viestejä, mutta tämä ei ole suositeltua.</p>
+        <p>Verkot käyttävät eri radio-asetuksia, joten myös <span class="term">kuuluvuudessa on eroja.</span> Eräät sähkömittarit toimivat samoilla taajuuksilla varsinkin Meshtasticin kanssa joka voi rajoittaa kuuluvuutta - esimerkiksi Turussa MeshCore vaikuttaa kuuluvan paremmin kuin Meshtastic.</p>
       </details>
       <details class="faq-item">
         <summary>Mitä laitteita tarvitsen ja paljonko ne maksavat?</summary>
-        <p>Tarvitset LoRa-radiomoduulilla varustetun solmulaitteen (esim. Heltec-, RAK- tai T-Deck-tyyppinen laite) sekä puhelimen tai tietokoneen mukana-appia varten. Hintahaarukka on karkeasti 20–100 € laitteesta riippuen.</p>
+        <p>Tarvitset LoRa-radiomoduulilla varustetun solmulaitteen (esim. Heltec-, RAK- tai T-Deck-tyyppinen laite) sekä puhelimen tai tietokoneen Companion-appia varten. Hintahaarukka on karkeasti 20–100 € laitteesta riippuen.</p>
       </details>
       <details class="faq-item">
-        <summary>Tarvitsenko luvan tai radioamatöörisertifikaatin?</summary>
+        <summary>Tarvitsenko luvan tai radiomatööriluvan?</summary>
         <p>Sekä MeshCore että Meshtastic käyttävät Euroopassa 868 MHz:n lupavapaata ISM-taajuusaluetta laitteen tehorajoissa. Radioamatöörilupaa ei tavallisessa käytössä tarvita — tarkista silti aina laitteesi asetukset ja lähetysteho paikallisten määräysten mukaisiksi.</p>
       </details>
       <details class="faq-item">
         <summary>Miten liityn Varsinais-Suomen verkkoon?</summary>
+        <p>ööö</p>
         <p>Liity MeshFinlandin Discordiin ja etsi kanava <strong>area-specific-chats → Turun alue</strong>. Siellä sovitaan solmujen sijainneista ja autetaan asennuksessa. Voit myös katsoa lähimmät solmut MeshCore- tai Meshtastic-kartalta ennen laitehankintaa.</p>
       </details>
       <details class="faq-item">
